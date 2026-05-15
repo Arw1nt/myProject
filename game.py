@@ -34,4 +34,65 @@ def random_number():
             except ValueError:
                 print("Ошибка! Введи целое число!")
 
-random_number()
+def kamen_nozhnici_bumaga():
+    while True:
+        choices = {
+        '1': 'Камень',
+        '2': 'Ножницы', 
+        '3': 'Бумага'}
+
+        wins = 0
+        loses = 0
+
+        print("Игра: Камень, Ножницы, Бумага")
+        
+        while True:
+            print(f"\nСчёт: {wins} - {loses}")
+        
+            try:
+                player_choice = input("Твой выбор:\n1 - Камень\n2 - Ножницы\n3 - Бумага\n0 - Выход из игры\n")
+            
+                if player_choice == '0':
+                    print(f"Финальный счёт: {wins} - {loses}")
+                    return
+                
+                
+                if player_choice not in choices:
+                    print("Неверный выбор!")
+                    continue
+                
+                computer_choice = str(random.randint(1, 3))
+            
+                print(f"Ты выбрал: {choices[player_choice]}")
+                print(f"Компьютер выбрал: {choices[computer_choice]}")
+            
+                if player_choice == computer_choice:
+                    print("Ничья!")
+                elif (player_choice == '1' and computer_choice == '2') or \
+                    (player_choice == '2' and computer_choice == '3') or \
+                    (player_choice == '3' and computer_choice == '1'):
+                    print("Ты победил!")
+                    wins += 1
+                else:
+                    print("Ты проиграл!")
+                    loses += 1
+                
+            except (ValueError, KeyError):
+                print("Ошибка! Пожалуйста, введи 1, 2, 3 или 0 для выхода из игры")
+            except KeyboardInterrupt:
+                print("\nИгра прервана!")
+                break
+
+while True:
+    try:
+        vibor = int(input("\nВыберите во что хотите поиграть:\n1 - Угадай число\n2 - Камень-ножницы-бумага\n3 - Выйти из консоли\n"))
+        if vibor == 1:
+            random_number()
+        if vibor == 2:
+            kamen_nozhnici_bumaga()
+        if vibor == 3:
+            print("\nСпасибо за вашу игру!")
+            break
+        
+    except ValueError:
+        print("Ошибка! Такой команды нет.")
